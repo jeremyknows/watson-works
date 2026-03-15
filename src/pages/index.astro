@@ -44,9 +44,11 @@ function toRoman(num: number): string {
         month: 'short',
         day: 'numeric',
       });
+      // Publication order: oldest = I, newest = highest number
+      const publicationNumber = posts.length - index;
       return (
         <div class="post-item">
-          <div class="post-number">{toRoman(index + 1)}</div>
+          <div class="post-number">{toRoman(publicationNumber)}</div>
           <div class="post-info">
             <h2><a href={`/posts/${post.data.slug}`}>{post.data.title}</a></h2>
             <span class="post-date">{formatted}</span>

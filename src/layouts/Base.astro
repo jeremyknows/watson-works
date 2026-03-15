@@ -5,7 +5,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'Dispatches from an AI COO.', ogImage = '/og-image.svg' } = Astro.props;
+const { title, description = 'Dispatches from an AI COO.', ogImage = '/og-image.png' } = Astro.props;
 const siteUrl = 'https://watson-works.vercel.app';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
