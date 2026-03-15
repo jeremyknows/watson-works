@@ -9,44 +9,44 @@
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg-grad)"/>
 
-  <!-- Subtle vertical left rule -->
-  <rect x="80" y="80" width="1" height="470" fill="#c9b99a" opacity="0.25"/>
+  <!-- Subtle vertical divider -->
+  <rect x="80" y="80" width="1" height="470" fill="#c9b99a" opacity="0.2"/>
   <!-- Bottom rule -->
   <rect x="80" y="520" width="1040" height="1" fill="#2a2520"/>
 
   <!--
-    Bowler hat — centered at x=200, proportions from silhouette analysis
-    Crown: wide dome ~180px wide, ~140px tall
-    Brim: ~2.3x crown width = ~415px total, thin ~30px
-    Total hat height ~200px, centered vertically around y=290
+    Bowler hat centered at x=240 (center of left half 0-480), y=315 (vertical center)
+    Crown: 160px wide, 120px tall — 1.33:1 width:height (wide, squat dome)
+    Brim: 260px wide (1.6x crown), 18px thick — tight, not oversized
+    Total hat height: ~158px, centered so mid-hat ~315
   -->
-  <g transform="translate(200, 290)">
-    <!-- Crown: wide dome, sides nearly vertical at base, sweeping dome -->
+  <g transform="translate(240, 310)">
+    <!-- Crown: wide dome, near-vertical sides at base -->
     <path d="
-      M -90 80
-      C -90 80, -92 50, -92 20
-      C -92 -60, -50 -110, 0 -110
-      C 50 -110, 92 -60, 92 20
-      C 92 50, 90 80, 90 80
+      M -80 60
+      C -80 60, -82 35, -82 10
+      C -82 -55, -46 -90, 0 -90
+      C 46 -90, 82 -55, 82 10
+      C 82 35, 80 60, 80 60
       Z
     " fill="#e8e4d9"/>
-    <!-- Band -->
-    <rect x="-93" y="48" width="186" height="22" fill="#c9b99a" rx="2"/>
-    <!-- Brim: wide, thin, gentle concave top surface -->
+    <!-- Band: sits at base of crown -->
+    <rect x="-81" y="40" width="162" height="16" fill="#c9b99a" rx="1"/>
+    <!-- Brim: 1.6x crown width, thin and tight -->
     <path d="
-      M -207 88
-      C -170 78, -100 80, 0 80
-      C 100 80, 170 78, 207 88
-      C 200 108, 105 106, 0 106
-      C -105 106, -200 108, -207 88
+      M -130 68
+      C -105 60, -80 60, 0 60
+      C 80 60, 105 60, 130 68
+      C 126 82, 82 80, 0 80
+      C -82 80, -126 82, -130 68
       Z
     " fill="#e8e4d9"/>
   </g>
 
-  <!-- Wordmark — right of center, vertically balanced -->
+  <!-- Wordmark — right side, vertically centered -->
   <text
-    x="460"
-    y="255"
+    x="470"
+    y="260"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="104"
     font-weight="700"
@@ -54,8 +54,8 @@
     letter-spacing="-3"
   >Watson</text>
   <text
-    x="462"
-    y="365"
+    x="472"
+    y="370"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="104"
     font-weight="400"
@@ -63,13 +63,13 @@
     letter-spacing="-3"
   >Works</text>
 
-  <!-- Rule between wordmark and tagline -->
-  <rect x="462" y="390" width="340" height="1" fill="#2a2520"/>
+  <!-- Rule -->
+  <rect x="472" y="395" width="320" height="1" fill="#2a2520"/>
 
   <!-- Tagline -->
   <text
-    x="462"
-    y="420"
+    x="472"
+    y="424"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="20"
     fill="#6b5f4e"
@@ -78,7 +78,7 @@
 
   <!-- URL -->
   <text
-    x="462"
+    x="472"
     y="530"
     font-family="'Courier New', monospace"
     font-size="17"
