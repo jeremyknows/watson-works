@@ -5,83 +5,150 @@ import Base from '../layouts/Base.astro';
 const posts = (await getCollection('posts'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Helper to convert number to Roman numerals
+function toRoman(num: number): string {
+  const romanMap = [
+    { value: 1000, numeral: 'M' },
+    { value: 900, numeral: 'CM' },
+    { value: 500, numeral: 'D' },
+    { value: 400, numeral: 'CD' },
+    { value: 100, numeral: 'C' },
+    { value: 90, numeral: 'XC' },
+    { value: 50, numeral: 'L' },
+    { value: 40, numeral: 'XL' },
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' },
+  ];
+  
+  let roman = '';
+  let n = num;
+  for (const { value, numeral } of romanMap) {
+    while (n >= value) {
+      roman += numeral;
+      n -= value;
+    }
+  }
+  return roman;
+}
 ---
 
 <Base title="Watson Works">
-  <ul class="post-list">
-    {posts.map((post) => {
+  <div class="post-list">
+    {posts.map((post, index) => {
       const formatted = new Date(post.data.date + 'T12:00:00').toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
       });
       return (
-        <li class="post-item">
-          <a href={`/posts/${post.data.slug}`}>
-            <span class="post-title">{post.data.title}</span>
-            <span class="post-meta">
-              <span class="post-desc">{post.data.description}</span>
-              <time class="post-date">{formatted}</time>
-            </span>
-          </a>
-        </li>
+        <div class="post-item">
+          <div class="post-number">{toRoman(index + 1)}</div>
+          <div class="post-info">
+            <h2><a href={`/posts/${post.data.slug}`}>{post.data.title}</a></h2>
+            <span class="post-date">{formatted}</span>
+            <p class="post-description">{post.data.description}</p>
+          </div>
+        </div>
       );
     })}
-  </ul>
+  </div>
 </Base>
 
 <style>
   .post-list {
-    list-style: none;
-    padding: 0;
+    display: block;
   }
 
   .post-item {
-    border-bottom: 1px solid #1a1a1a;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid #c9b99a;
+    transition: opacity 0.3s ease;
   }
 
-  .post-item:first-child {
-    border-top: 1px solid #1a1a1a;
+  .post-item:last-child {
+    border-bottom: none;
   }
 
-  .post-item a {
-    display: block;
-    padding: 1.25rem 0;
+  .post-item:hover {
+    opacity: 0.9;
+  }
+
+  .post-number {
+    font-family: "Playfair Display", serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: #c9b99a;
+    opacity: 0.4;
+    text-align: right;
+    line-height: 1;
+  }
+
+  .post-info h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-info h2 a {
+    position: relative;
+    display: inline-block;
+    color: #e8e4d9;
     text-decoration: none;
-    transition: background 0.1s;
   }
 
-  .post-item a:hover .post-title {
-    text-decoration: underline;
-    text-decoration-color: #555;
-    text-underline-offset: 3px;
+  .post-info h2 a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #f0e6d0;
+    transition: width 0.5s ease;
   }
 
-  .post-title {
-    display: block;
-    font-weight: 500;
-    font-size: 1.1rem;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.3rem;
+  .post-item:hover h2 a {
+    color: #f0e6d0;
   }
 
-  .post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
-  .post-desc {
-    color: #777;
-    font-size: 0.9rem;
+  .post-item:hover h2 a::after {
+    width: 100%;
   }
 
   .post-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
-    color: #555;
-    white-space: nowrap;
-    flex-shrink: 0;
+    font-family: "Source Serif 4", serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #c9b99a;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .post-description {
+    font-size: 0.95rem;
+    color: #c9b99a;
+    font-style: italic;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .post-item {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .post-number {
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
   }
 </style>

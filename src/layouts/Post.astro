@@ -15,44 +15,82 @@ const formatted = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
 ---
 
 <style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background-color: #c9b99a;
+    width: 0%;
+    z-index: 101;
+    transition: width 0.1s ease;
+  }
+
+  .post-content {
+    max-width: 660px;
+    margin: 0 auto;
+  }
+
   .post-header {
     margin-bottom: 3rem;
+    border-bottom: 1px solid #c9b99a;
+    padding-bottom: 2rem;
   }
 
   .post-date {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "Source Serif 4", serif;
     font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+    color: #c9b99a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    display: block;
   }
 
   .post-title {
-    font-size: 1.75rem;
-    font-weight: 500;
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    font-weight: 600;
     line-height: 1.3;
-    letter-spacing: -0.02em;
+  }
+
+  .post-body {
+    margin-top: 2rem;
   }
 
   .post-body :global(p) {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Drop cap on first paragraph */
+  .post-body :global(p:first-of-type::first-letter) {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    float: left;
+    line-height: 1;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+    color: #c9b99a;
   }
 
   .post-body :global(h2) {
-    font-size: 1.25rem;
-    font-weight: 500;
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    font-weight: 600;
     margin: 2.5rem 0 1rem;
-    letter-spacing: -0.01em;
   }
 
   .post-body :global(h3) {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin: 2rem 0 0.75rem;
   }
 
   .post-body :global(ul),
   .post-body :global(ol) {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     padding-left: 1.5rem;
   }
 
@@ -60,38 +98,84 @@ const formatted = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
     margin-bottom: 0.35rem;
   }
 
+  /* Pull quotes - styled blockquotes */
   .post-body :global(blockquote) {
-    border-left: 2px solid #333;
-    padding-left: 1rem;
-    color: #aaa;
-    margin: 1.5rem 0;
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #c9b99a;
+    margin: 2rem -2rem;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid #c9b99a;
+    line-height: 1.6;
   }
 
   .post-body :global(hr) {
     border: none;
-    border-top: 1px solid #222;
+    border-top: 1px solid #c9b99a;
     margin: 2.5rem 0;
   }
 
   .back-link {
     display: inline-block;
     margin-top: 4rem;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: "Source Serif 4", serif;
     font-size: 0.85rem;
-    color: #666;
+    color: #c9b99a;
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
   .back-link:hover {
-    color: #e8e4d9;
+    color: #f0e6d0;
+  }
+
+  @media (max-width: 768px) {
+    .post-body :global(blockquote) {
+      margin: 2rem -1.5rem;
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.8rem;
+    }
   }
 </style>
 
-<div class="post-header">
-  <div class="post-date">{formatted}</div>
-  <h1 class="post-title">{title}</h1>
+<div class="reading-progress"></div>
+<div class="post-content">
+  <div class="post-header">
+    <div class="post-date">{formatted}</div>
+    <h1 class="post-title">{title}</h1>
+  </div>
+  <div class="post-body">
+    <slot />
+  </div>
+  <a href="/" class="back-link">&larr; back</a>
 </div>
-<div class="post-body">
-  <slot />
-</div>
-<a href="/" class="back-link">&larr; back</a>
+
+<script>
+  // Update reading progress bar on scroll
+  function updateProgress() {
+    const postContent = document.querySelector('.post-content');
+    if (!postContent) return;
+    
+    const windowHeight = window.innerHeight;
+    const contentHeight = postContent.offsetHeight;
+    const contentTop = postContent.offsetTop;
+    
+    const scrolled = window.scrollY;
+    const scrollableDistance = contentHeight - windowHeight;
+    const progress = Math.min((scrolled - contentTop + windowHeight) / (contentHeight + windowHeight) * 100, 100);
+    
+    const progressBar = document.querySelector('.reading-progress');
+    if (progressBar) {
+      progressBar.style.width = Math.max(progress, 0) + '%';
+    }
+  }
+
+  window.addEventListener('scroll', updateProgress);
+  window.addEventListener('resize', updateProgress);
+</script>
