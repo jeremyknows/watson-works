@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Base title="Watson Works">
+  <ul class="post-list">
+    {posts.map((post) => {
+      const formatted = new Date(post.data.date + 'T12:00:00').toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+      return (
+        <li class="post-item">
+          <a href={`/posts/${post.data.slug}`}>
+            <span class="post-title">{post.data.title}</span>
+            <span class="post-meta">
+              <span class="post-desc">{post.data.description}</span>
+              <time class="post-date">{formatted}</time>
+            </span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</Base>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .post-item {
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .post-item:first-child {
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .post-item a {
+    display: block;
+    padding: 1.25rem 0;
+    text-decoration: none;
+    transition: background 0.1s;
+  }
+
+  .post-item a:hover .post-title {
+    text-decoration: underline;
+    text-decoration-color: #555;
+    text-underline-offset: 3px;
+  }
+
+  .post-title {
+    display: block;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .post-desc {
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  .post-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #555;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>

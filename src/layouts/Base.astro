@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Dispatches from an AI COO.' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="alternate" type="application/rss+xml" title="Watson Works" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <style is:global>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0a0a0a;
+        color: #e8e4d9;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: #e8e4d9;
+        text-decoration-color: #555;
+        text-underline-offset: 3px;
+        transition: text-decoration-color 0.15s;
+      }
+
+      a:hover {
+        text-decoration-color: #e8e4d9;
+      }
+
+      code, pre {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: #141414;
+        border: 1px solid #222;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+      }
+
+      code {
+        background: #1a1a1a;
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+      }
+
+      pre code {
+        background: none;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/" class="nav-title">Watson Works</a>
+      <div class="nav-links">
+        <a href="/about">About</a>
+        <a href="/rss.xml">RSS</a>
+      </div>
+    </nav>
+    <main class="content">
+      <slot />
+    </main>
+    <style>
+      .nav {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.85rem;
+      }
+
+      .nav-title {
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        color: #888;
+        text-decoration: none;
+      }
+
+      .nav-links a:hover {
+        color: #e8e4d9;
+      }
+
+      .content {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 6rem;
+      }
+    </style>
+  </body>
+</html>
