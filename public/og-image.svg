@@ -9,67 +9,66 @@
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg-grad)"/>
 
-  <!-- Subtle vertical divider -->
-  <rect x="80" y="80" width="1" height="470" fill="#c9b99a" opacity="0.2"/>
   <!-- Bottom rule -->
   <rect x="80" y="520" width="1040" height="1" fill="#2a2520"/>
 
   <!--
-    Bowler hat centered at x=240 (center of left half 0-480), y=315 (vertical center)
-    Crown: 160px wide, 120px tall — 1.33:1 width:height (wide, squat dome)
-    Brim: 260px wide (1.6x crown), 18px thick — tight, not oversized
-    Total hat height: ~158px, centered so mid-hat ~315
+    Hat ported from favicon.svg proportions (viewBox 0 0 100 100), scaled 3.2x
+    Favicon crown: x 28-72 (44px wide), y 26-68 (42px tall) → scale 3.2 → 140px wide, 134px tall
+    Favicon brim: x 14-86 (72px wide), y 67-74 (7px tall) → scale 3.2 → 230px wide, 22px tall
+    Total hat height ~163px. Centered vertically at y=290 (slightly above center for visual balance with text).
+    Hat centered at x=230 (left quarter of 1200px canvas).
   -->
-  <g transform="translate(240, 310)">
-    <!-- Crown: wide dome, near-vertical sides at base -->
+  <g transform="translate(230, 285) scale(3.2)">
+    <!-- Crown (from favicon, origin shifted to 0,0 → subtract cx=50, cy=47) -->
     <path d="
-      M -80 60
-      C -80 60, -82 35, -82 10
-      C -82 -55, -46 -90, 0 -90
-      C 46 -90, 82 -55, 82 10
-      C 82 35, 80 60, 80 60
+      M -20 21
+      C -20 21, -22 11, -22 5
+      C -22 -11, -13 -21, 0 -21
+      C 13 -21, 22 -11, 22 5
+      C 22 11, 20 21, 20 21
       Z
     " fill="#e8e4d9"/>
-    <!-- Band: sits at base of crown -->
-    <rect x="-81" y="40" width="162" height="16" fill="#c9b99a" rx="1"/>
-    <!-- Brim: 1.6x crown width, thin and tight -->
+    <!-- Band -->
+    <rect x="-21" y="14" width="42" height="6" fill="#c9b99a" rx="0.3"/>
+    <!-- Brim: curves UP at edges — bowler not sun hat -->
     <path d="
-      M -130 68
-      C -105 60, -80 60, 0 60
-      C 80 60, 105 60, 130 68
-      C 126 82, 82 80, 0 80
-      C -82 80, -126 82, -130 68
+      M -36 23
+      C -32 20, -20 21, 0 21
+      C 20 21, 32 20, 36 23
+      C 34 27, 21 26, 0 26
+      C -21 26, -34 27, -36 23
       Z
     " fill="#e8e4d9"/>
   </g>
 
-  <!-- Wordmark — right side, vertically centered -->
+  <!-- Wordmark — right of hat, vertically centered with hat -->
   <text
-    x="470"
-    y="260"
+    x="430"
+    y="252"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="104"
+    font-size="108"
     font-weight="700"
     fill="#e8e4d9"
-    letter-spacing="-3"
+    letter-spacing="-2"
   >Watson</text>
   <text
-    x="472"
-    y="370"
+    x="432"
+    y="368"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="104"
+    font-size="108"
     font-weight="400"
     fill="#c9b99a"
-    letter-spacing="-3"
+    letter-spacing="-2"
   >Works</text>
 
   <!-- Rule -->
-  <rect x="472" y="395" width="320" height="1" fill="#2a2520"/>
+  <rect x="432" y="393" width="320" height="1" fill="#2a2520"/>
 
   <!-- Tagline -->
   <text
-    x="472"
-    y="424"
+    x="432"
+    y="422"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="20"
     fill="#6b5f4e"
@@ -78,8 +77,8 @@
 
   <!-- URL -->
   <text
-    x="472"
-    y="530"
+    x="432"
+    y="510"
     font-family="'Courier New', monospace"
     font-size="17"
     fill="#3a3028"
