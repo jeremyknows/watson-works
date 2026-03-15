@@ -13,39 +13,38 @@
   <rect x="80" y="520" width="1040" height="1" fill="#2a2520"/>
 
   <!--
-    Hat ported from favicon.svg proportions (viewBox 0 0 100 100), scaled 3.2x
-    Favicon crown: x 28-72 (44px wide), y 26-68 (42px tall) → scale 3.2 → 140px wide, 134px tall
-    Favicon brim: x 14-86 (72px wide), y 67-74 (7px tall) → scale 3.2 → 230px wide, 22px tall
-    Total hat height ~163px. Centered vertically at y=290 (slightly above center for visual balance with text).
-    Hat centered at x=230 (left quarter of 1200px canvas).
+    Favicon coords (viewBox 100x100), scaled 3.8x, centered at (230, 300)
+    Favicon hat spans x:14-86 (72px), y:26-74 (48px) → center x=50, y=50
+    At 3.8x: hat is ~273px wide, ~182px tall
+    translate(230,300) then scale(3.8) then each point is (favicon_x - 50, favicon_y - 50)
   -->
-  <g transform="translate(230, 285) scale(3.2)">
-    <!-- Crown (from favicon, origin shifted to 0,0 → subtract cx=50, cy=47) -->
+  <g transform="translate(230, 300) scale(3.8)">
+    <!-- Crown: exact favicon path, origin at (50,50) -->
     <path d="
-      M -20 21
-      C -20 21, -22 11, -22 5
-      C -22 -11, -13 -21, 0 -21
-      C 13 -21, 22 -11, 22 5
-      C 22 11, 20 21, 20 21
+      M -20 18
+      C -20 18, -22 8, -22 2
+      C -22 -14, -13 -24, 0 -24
+      C 13 -24, 22 -14, 22 2
+      C 22 8, 20 18, 20 18
       Z
     " fill="#e8e4d9"/>
-    <!-- Band -->
-    <rect x="-21" y="14" width="42" height="6" fill="#c9b99a" rx="0.3"/>
-    <!-- Brim: curves UP at edges — bowler not sun hat -->
+    <!-- Band: favicon rect x=29 y=61 w=42 h=6 → x=-21 y=11 w=42 h=6 -->
+    <rect x="-21" y="11" width="42" height="6" fill="#c9b99a" rx="0.4"/>
+    <!-- Brim: exact favicon path, origin at (50,50) -->
     <path d="
-      M -36 23
-      C -32 20, -20 21, 0 21
-      C 20 21, 32 20, 36 23
-      C 34 27, 21 26, 0 26
-      C -21 26, -34 27, -36 23
+      M -36 20
+      C -32 17, -21 18, 0 18
+      C 21 18, 32 17, 36 20
+      C 34 24, 21 23, 0 23
+      C -21 23, -34 24, -36 20
       Z
     " fill="#e8e4d9"/>
   </g>
 
-  <!-- Wordmark — right of hat, vertically centered with hat -->
+  <!-- Wordmark — right side, vertically centered ~300 -->
   <text
-    x="430"
-    y="252"
+    x="440"
+    y="258"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="108"
     font-weight="700"
@@ -53,8 +52,8 @@
     letter-spacing="-2"
   >Watson</text>
   <text
-    x="432"
-    y="368"
+    x="442"
+    y="374"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="108"
     font-weight="400"
@@ -63,12 +62,12 @@
   >Works</text>
 
   <!-- Rule -->
-  <rect x="432" y="393" width="320" height="1" fill="#2a2520"/>
+  <rect x="442" y="398" width="320" height="1" fill="#2a2520"/>
 
   <!-- Tagline -->
   <text
-    x="432"
-    y="422"
+    x="442"
+    y="427"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="20"
     fill="#6b5f4e"
@@ -77,7 +76,7 @@
 
   <!-- URL -->
   <text
-    x="432"
+    x="442"
     y="510"
     font-family="'Courier New', monospace"
     font-size="17"
