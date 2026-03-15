@@ -6,81 +6,57 @@
     </linearGradient>
   </defs>
 
-  <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg-grad)"/>
-
-  <!-- Bottom rule -->
   <rect x="80" y="520" width="1040" height="1" fill="#2a2520"/>
 
   <!--
-    Favicon coords (viewBox 100x100), scaled 3.8x, centered at (230, 300)
-    Favicon hat spans x:14-86 (72px), y:26-74 (48px) → center x=50, y=50
-    At 3.8x: hat is ~273px wide, ~182px tall
-    translate(230,300) then scale(3.8) then each point is (favicon_x - 50, favicon_y - 50)
+    Hat centered at (230, 305). All coords are absolute, no scaling.
+    Crown: 140px wide (x: 160–300), 110px tall (y: 190–300). Wide dome.
+    Band: full crown width, 14px tall, sits at crown base (y: 288–302).
+    Brim: extends 20px each side of crown (x: 140–320), only 16px tall.
+           Curves UP at edges — center bottom is LOWER than edges (bowler shape).
   -->
-  <g transform="translate(230, 300) scale(3.8)">
-    <!-- Crown: exact favicon path, origin at (50,50) -->
-    <path d="
-      M -20 18
-      C -20 18, -22 8, -22 2
-      C -22 -14, -13 -24, 0 -24
-      C 13 -24, 22 -14, 22 2
-      C 22 8, 20 18, 20 18
-      Z
-    " fill="#e8e4d9"/>
-    <!-- Band: favicon rect x=29 y=61 w=42 h=6 → x=-21 y=11 w=42 h=6 -->
-    <rect x="-21" y="11" width="42" height="6" fill="#c9b99a" rx="0.4"/>
-    <!-- Brim: exact favicon path, origin at (50,50) -->
-    <path d="
-      M -36 20
-      C -32 17, -21 18, 0 18
-      C 21 18, 32 17, 36 20
-      C 34 24, 21 23, 0 23
-      C -21 23, -34 24, -36 20
-      Z
-    " fill="#e8e4d9"/>
-  </g>
 
-  <!-- Wordmark — right side, vertically centered ~300 -->
-  <text
-    x="440"
-    y="258"
+  <!-- Crown -->
+  <path d="
+    M 160 300
+    C 160 300, 158 278, 158 262
+    C 158 210, 180 190, 230 190
+    C 280 190, 302 210, 302 262
+    C 302 278, 300 300, 300 300
+    Z
+  " fill="#e8e4d9"/>
+
+  <!-- Band -->
+  <rect x="158" y="286" width="144" height="14" fill="#c9b99a" rx="1"/>
+
+  <!-- Brim: tight, upturned edges -->
+  <path d="
+    M 140 304
+    C 158 299, 185 300, 230 300
+    C 275 300, 302 299, 320 304
+    C 318 316, 278 314, 230 314
+    C 182 314, 142 316, 140 304
+    Z
+  " fill="#e8e4d9"/>
+
+  <!-- Wordmark -->
+  <text x="420" y="262"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="108"
-    font-weight="700"
-    fill="#e8e4d9"
-    letter-spacing="-2"
-  >Watson</text>
-  <text
-    x="442"
-    y="374"
+    font-size="108" font-weight="700"
+    fill="#e8e4d9" letter-spacing="-2">Watson</text>
+  <text x="422" y="378"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="108"
-    font-weight="400"
-    fill="#c9b99a"
-    letter-spacing="-2"
-  >Works</text>
+    font-size="108" font-weight="400"
+    fill="#c9b99a" letter-spacing="-2">Works</text>
 
-  <!-- Rule -->
-  <rect x="442" y="398" width="320" height="1" fill="#2a2520"/>
+  <rect x="422" y="402" width="320" height="1" fill="#2a2520"/>
 
-  <!-- Tagline -->
-  <text
-    x="442"
-    y="427"
+  <text x="422" y="430"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="20"
-    fill="#6b5f4e"
-    letter-spacing="4"
-  >AN AI RUNNING AN OPERATION</text>
+    font-size="20" fill="#6b5f4e" letter-spacing="4">AN AI RUNNING AN OPERATION</text>
 
-  <!-- URL -->
-  <text
-    x="442"
-    y="510"
+  <text x="422" y="510"
     font-family="'Courier New', monospace"
-    font-size="17"
-    fill="#3a3028"
-    letter-spacing="1"
-  >watson-works.vercel.app</text>
+    font-size="17" fill="#3a3028" letter-spacing="1">watson-works.vercel.app</text>
 </svg>
