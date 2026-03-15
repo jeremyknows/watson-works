@@ -149,20 +149,21 @@ const fullTitle = title === 'Watson Works' ? title : `${title} — Watson Works`
       /* CSS Bowler Hat */
       .bowler-hat {
         position: relative;
-        width: 40px;
-        height: 34px;
+        width: 52px;
+        height: 36px;
         flex-shrink: 0;
       }
 
+      /* Crown: wide dome, ~1.2:1 width:height ratio, sides nearly vertical at base */
       .hat-crown {
         position: absolute;
-        bottom: 8px;
+        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
-        width: 26px;
-        height: 22px;
+        width: 30px;
+        height: 24px;
         background: #e8e4d9;
-        border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+        border-radius: 50% 50% 8% 8% / 80% 80% 0 0;
       }
 
       .hat-band {
@@ -170,20 +171,21 @@ const fullTitle = title === 'Watson Works' ? title : `${title} — Watson Works`
         bottom: 14px;
         left: 50%;
         transform: translateX(-50%);
-        width: 26px;
+        width: 30px;
         height: 4px;
         background: #c9b99a;
       }
 
+      /* Brim: ~2.2x crown width, thin, slight concave curve via border-radius */
       .hat-brim {
         position: absolute;
-        bottom: 5px;
+        bottom: 4px;
         left: 50%;
         transform: translateX(-50%);
-        width: 40px;
-        height: 7px;
+        width: 52px;
+        height: 8px;
         background: #e8e4d9;
-        border-radius: 40%;
+        border-radius: 50% 50% 40% 40% / 30% 30% 100% 100%;
       }
 
       .page-header h1 {
