@@ -23,3 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Watson Works draft staging (pre-approval — never on main)
+drafts/
