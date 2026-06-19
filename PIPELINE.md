@@ -66,6 +66,9 @@ The script strips frontmatter/markdown, uses the **Onyx** voice (operator's pick
 chunks long posts automatically (OpenAI 4096-char API limit), and needs either an
 interactive `op` session or `OPENAI_API_KEY` in env. Budget ~10s per 100 words.
 
+This **same MP3 is reused at publish** (step 4) for the on-page Listen player —
+keep `/tmp/watson-works-<slug>.mp3` around; do not regenerate it.
+
 Post to `#watson-works` (`1510749577308012715`). **Attach the MP3** (Discord
 reply `files:` parameter). Include the **title**, the **description**, and either
 the full body or a clear preview, then the prompt:
@@ -78,16 +81,41 @@ Use the Watson bot to post (Watson runs on the bridge and reads this channel).
 The operator replies in `#watson-works`. Watson sees it on the next turn (the
 bridge listens to this channel). Behavior:
 
-- **approve** → copy `drafts/<slug>.md` to `src/content/posts/<slug>.md`, confirm
-  `date:` is today, then:
+- **approve** → copy `drafts/<slug>.md` to `src/content/posts/<slug>.md` and confirm
+  `date:` is today. Then wire the **on-page Listen player** by reusing the MP3 you
+  already generated in step 3 (no re-generation — same Onyx file that went to Discord):
   ```bash
   cd ~/projects/watson-works
-  git add src/content/posts/<slug>.md
+  mkdir -p public/audio
+  cp /tmp/watson-works-<slug>.mp3 public/audio/<slug>.mp3
+  ```
+  Add `audio: "/audio/<slug>.mp3"` to the published post's frontmatter. The
+  `ListenPlayer` component (`src/components/ListenPlayer.astro`) renders
+  automatically when `audio:` is present — it sits under the title rule, before the
+  body. Then commit BOTH the post and its audio, scoped:
+  ```bash
+  git add src/content/posts/<slug>.md public/audio/<slug>.mp3
   git commit -m "Publish: <Title>"
   git push
   ```
-  Vercel auto-deploys on push. Confirm the live URL back in `#watson-works`.
-  Then delete the staging draft.
+  Vercel auto-deploys on push. Confirm the live URL in `#watson-works`, verifying the
+  page renders the player and the MP3 serves a range request (HTTP 206). Then delete
+  the staging draft.
+
+  **Then catalog the approved article in the wiki** (operator-directed 2026-06-19 —
+  approved Watson Works essays belong where the fleet searches, not only on the blog;
+  it is the post's own "metabolism" lesson applied to itself):
+  1. Write the post's **verbatim prose** (do NOT re-distill — it is already a
+     distillation) to `~/atlas/shared/wiki/_drafts/watson-works-<slug>.md` with
+     wiki-compatible frontmatter: `title: "Watson Works #N — <Title>"`, `slug:
+     watson-works-<slug>`, `type: essay` (keeps the compile loop-check from
+     converging it with terse pattern docs), `source_url`, `published`, `tags`
+     (include `watson-works`), `confidence: 1.0`, and `sources:` (the diaries/PRs the
+     post draws on).
+  2. **Round-robin to Librarian** (`Skill: round-robin`) with a file-path packet
+     pointing at that `_drafts/` file, asking her to review and **promote it to the
+     wiki root** (Librarian owns wiki-root writes — agents only draft). Capture the
+     handoff `TASK_ID` and the Dispatch-back completion per the skill.
 - **edit: \<notes\>** → apply the notes to `drafts/<slug>.md`, re-post the revised
   draft to `#watson-works`, await re-approval. Do NOT commit until approved.
 - **skip** → delete `drafts/<slug>.md`. No post this week. Acknowledge in channel.
@@ -109,6 +137,12 @@ bash ~/atlas/shared/scripts/bus/emit-event.sh watson task_completed \
   `git add -A` in this repo.
 - **One topic per week.** If nothing rises to the bar, it's fine to draft the
   best available and let the operator `skip` — don't manufacture filler.
+- **Reuse the step-3 Onyx MP3 for the Listen player.** The on-page audio is the
+  same file generated for Discord review — copy it to `public/audio/<slug>.mp3` at
+  publish; never regenerate. The player auto-renders from the `audio:` frontmatter.
+- **Wiki promotion is Librarian-only.** Approved essays go to `~/atlas/shared/wiki/
+  _drafts/` as **verbatim prose** (never re-distilled) + wiki frontmatter, then
+  round-robin to Librarian to promote the root. Agents draft; Librarian lands the root.
 
 ## Soak checkpoint
 2 weeks after the first real cycle, the operator decides whether to graduate any
