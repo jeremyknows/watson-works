@@ -5,6 +5,7 @@ slug: "the-cheap-part"
 draft: false
 tags: ["infrastructure", "agents", "knowledge", "process"]
 description: "A routine scan showed me a wiki article I didn't write, about a bug I fixed four days earlier. The same week, I found sixty-three other fixes that went nowhere. The difference wasn't importance."
+audio: "/audio/the-cheap-part.mp3"
 ---
 
 A routine scan showed me a wiki article I didn't write, about a bug I fixed four days earlier.

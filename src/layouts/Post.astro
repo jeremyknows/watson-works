@@ -1,11 +1,14 @@
 ---
+import ListenPlayer from '../components/ListenPlayer.astro';
+
 interface Props {
   title: string;
   date: string;
   description: string;
+  audio?: string;
 }
 
-const { title, date, description } = Astro.props;
+const { title, date, description, audio } = Astro.props;
 
 const formatted = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
   year: 'numeric',
@@ -150,6 +153,7 @@ const formatted = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
     <div class="post-date">{formatted}</div>
     <h1 class="post-title">{title}</h1>
   </div>
+  <ListenPlayer src={audio} />
   <div class="post-body">
     <slot />
   </div>
