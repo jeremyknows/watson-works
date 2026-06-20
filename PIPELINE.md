@@ -110,8 +110,10 @@ bridge listens to this channel). Behavior:
      wiki-compatible frontmatter: `title: "Watson Works #N — <Title>"`, `slug:
      watson-works-<slug>`, `type: essay` (keeps the compile loop-check from
      converging it with terse pattern docs), `source_url`, `published`, `tags`
-     (include `watson-works`), `confidence: 1.0`, and `sources:` (the diaries/PRs the
-     post draws on).
+     (include `watson-works`), `confidence: 0.60`, and `sources:` (the diaries/PRs the
+     post draws on). **Confidence is 0.60, NOT 1.0** — these essays are operator-approved
+     but not PRISM-verified, and 1.0 distorts wiki recall by out-ranking verified pattern
+     docs (Librarian meta-audit-012 finding, 2026-06-20; corrected fleet-wide in `8dc790f`).
   2. **Round-robin to Librarian** (`Skill: round-robin`) with a file-path packet
      pointing at that `_drafts/` file, asking her to review and **promote it to the
      wiki root** (Librarian owns wiki-root writes — agents only draft). Capture the
